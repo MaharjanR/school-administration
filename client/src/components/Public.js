@@ -7,17 +7,24 @@ export default class Public extends Component {
     render(){
         const { context } = this.props;
         let courses;
+        let courseArr = [];
 
         courses = context.data.getCourse()
             .then( data => data.map( (course) => {
                 console.log(course);
-                return <Courses />;
+            return <Courses key={course.id} title={course.title} />;
             }));
 
+        courses.then( data => {
+            console.log(data);
+            courseArr = data;
+        });
+
+        console.log(courseArr);        
         return(
             <div className="bounds">
 
-                {courses}
+                {courseArr}
                 {/* <div className="grid-33">
                 <a className="course--module course--link" href="course-detail.html">
                     <h4 className="course--label">Course</h4>
