@@ -4,12 +4,14 @@ import {
   Route,
   Switch
 } from 'react-router-dom';
-import './App.css';
 import Header from './components/Header';
 import Public from './components/Public';
 import Create from './components/Create';
 import Detail from './components/Detail';
 import Errors from './components/Error';
+import withContext from './Context';
+
+const PublicWithContext = withContext(Public);
 
 function App() {
   return (
@@ -18,7 +20,7 @@ function App() {
         <Header />       
         <hr />
         <Switch>
-          <Route exact path='/' component={Public} />
+          <Route exact path='/' component={PublicWithContext} />
           <Route path='/create' component={Create} />
           <Route path='/detail' component={Detail} />
           <Route path='/error' component={Errors} />

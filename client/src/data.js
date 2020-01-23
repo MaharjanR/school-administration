@@ -24,6 +24,19 @@ export default class Data {
     return fetch(url, options);
   }
 
+  async getCourse() {
+    const response = await this.api(`/courses`, 'GET');
+    if (response.status === 200) {
+      return response.json().then(data => data);
+    }
+    else if (response.status === 401) {
+      return null;
+    }
+    else {
+      throw new Error();
+    }
+  }
+
   async getUser(username, password) {
     const response = await this.api(`/users`, 'GET', null, true, { username, password });
     if (response.status === 200) {
