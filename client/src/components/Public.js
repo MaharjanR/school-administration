@@ -3,46 +3,41 @@ import Courses from './Courses';
 
 export default class Public extends Component {
 
+    state = {
+        courses: null
+    }; 
 
-    render(){
+    async componentDidMount(){
+        
         const { context } = this.props;
-        let courses;
-        let courseArr = [];
 
-        courses = context.data.getCourse()
-            .then( data => data.map( (course) => {
-                console.log(course);
-            return <Courses key={course.id} title={course.title} />;
-            }));
+        // Getting courses data from the api
+        let course = await context.data.getCourses();
 
-        courses.then( data => {
-            console.log(data);
-            courseArr = data;
+        // using the courses data from api and using it to create each course component
+        let allCourses = course.map( course => {
+            return <Courses key={course.id} title={course.title} id={course.id} />;
+        })
+
+        // setting the course state to the component courses
+        this.setState({
+            courses: allCourses
         });
 
-        console.log(courseArr);        
+        console.log(this.state.courses);
+    }
+
+    render(){
+
+        const {courses} = this.state;
+        
+             
         return(
             <div className="bounds">
 
-                {courseArr}
-                {/* <div className="grid-33">
-                <a className="course--module course--link" href="course-detail.html">
-                    <h4 className="course--label">Course</h4>
-                    <h3 className="course--title">Build a Basic Bookcase</h3>
-                </a>    
-                </div>
-                <div className="grid-33">
-                <a className="course--module course--link" href="course-detail.html">
-                    <h4 className="course--label">Course</h4>
-                    <h3 className="course--title">Learn How to Program</h3>
-                </a>
-                </div>
-                <div className="grid-33">
-                <a className="course--module course--link" href="course-detail.html">
-                    <h4 className="course--label">Course</h4>
-                    <h3 className="course--title">Learn How to Test Programs</h3>
-                </a>
-                </div> */}
+                {/* Generating all the courses */}
+                {courses}
+
                 <div className="grid-33">
                     <a className="course--module course--add--module" href="create-course.html">
                         <h3 className="course--add--title"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
