@@ -18,7 +18,7 @@ function asyncHandler(cb){
         catch(err){
             if(err.name === "SequelizeValidationError") { 
                 const errorMessage = err.errors.map( errorMessage => errorMessage.message);
-                res.status(400).json(errorMessage);
+                res.status(400).json({ message: errorMessage });
             }
             else if( err.name === "SequelizeForeignKeyConstraintError"){
                 res.status(400).json({message: 'Foreign Key is required'});
