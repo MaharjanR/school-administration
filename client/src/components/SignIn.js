@@ -12,7 +12,7 @@ export default class SignIn extends Component{
     submit = () => {
         const { context } = this.props;
         const { emailAddress, password } = this.state;
-        const { from } = this.props.location.state || { from: { pathname: '/authenticated' } };
+        const { from } = this.props.location.state || { from: { pathname: '/' } };
 
         context.action.signIn( emailAddress, password )
             .then( user => {
@@ -51,8 +51,6 @@ export default class SignIn extends Component{
     render(){
 
         const {
-            emailAddress,
-            password,
             errors
         } = this.state;
 
@@ -73,7 +71,7 @@ export default class SignIn extends Component{
                         )} />
                     </div>
                     <p>&nbsp;</p>
-                    <p>Don't have a user account? <a href="sign-up.html">Click here</a> to sign up!</p>
+                    <p>Don't have a user account? <a href="signup">Click here</a> to sign up!</p>
                 </div>
             </div>
         )

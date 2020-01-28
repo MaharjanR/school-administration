@@ -13,13 +13,11 @@ export default class Detail extends Component{
         const path = this.props.location.pathname;
 
         const temp = await context.data.getCourse(path);
-        console.log(temp);
         
         this.setState({
             course: temp
         });
         
-        // console.log(this.state.course);
     }
 
     render(){

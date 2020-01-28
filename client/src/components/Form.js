@@ -37,6 +37,7 @@ function ErrorsDisplay({ errors }) {
   let errorsDisplay = null;
 
   if (errors.length) {
+    console.log(errors);
     errorsDisplay = (
       <div>
         <h2 className="validation--errors--label">Validation errors</h2>
