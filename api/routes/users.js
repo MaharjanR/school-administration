@@ -47,15 +47,14 @@ router.post('/', asyncHandler(async (req, res) => {
     
     if(req.body){
         const user = await User.build(req.body);
+
         if(user.password){
             user.password = bcryptjs.hashSync(user.password);
-            await user.save();
-            res.location('/');
-            res.status(201).end();
         }
-        else{
-            res.status(400).json({message: 'Please enter all the required fields'});
-        }
+
+        await user.save();
+        res.location('/');
+        res.status(201).end();
 
     }
     else{
