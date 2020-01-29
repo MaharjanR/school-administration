@@ -33,7 +33,9 @@ export class Provider extends Component{
   }
 
   render(){
+    const authenticatedUser = this.authenticatedUser;
     const value = {
+      authenticatedUser,
       data: this.data,
       action: {
         signIn: this.signIn,

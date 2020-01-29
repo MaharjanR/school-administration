@@ -13,6 +13,8 @@ import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import withContext from './Context';
 
+const HeaderUpWithContext = withContext(Header);
+
 const PublicWithContext = withContext(Public);
 const DetailWithContext = withContext(Detail);
 const SignInWithContext = withContext(SignIn);
@@ -22,7 +24,7 @@ function App() {
   return (
     <Router>
       <React.Fragment>
-        <Header />       
+        <HeaderUpWithContext />       
         <hr />
         <Switch>
           <Route exact path='/' component={PublicWithContext} />
