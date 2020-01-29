@@ -10,10 +10,13 @@ export default class SignIn extends Component{
     }
 
     submit = () => {
+
         const { context } = this.props;
         const { emailAddress, password } = this.state;
         const { from } = this.props.location.state || { from: { pathname: '/' } };
 
+        console.log(emailAddress);
+        console.log(password);
         context.action.signIn( emailAddress, password )
             .then( user => {
                 if( user === null){
@@ -29,6 +32,7 @@ export default class SignIn extends Component{
                   }
             })
             .catch( err => {
+                console.log(err);
                 this.props.history.push('/error');
             })
     }
