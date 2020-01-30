@@ -24,31 +24,31 @@ export default class SignUp extends Component{
         }
 
         if( password === confirmPassword){
-        context.data.createUser(user)
-        .then( errors => {
-            console.log(errors);
-            if (errors.length) {
+            context.data.createUser(user)
+            .then( errors => {
                 console.log(errors);
-                this.setState({ errors });
-            }
-            else {
-                console.log('I am running as well');
-                context.action.signIn(emailAddress, password)
-                .then(() => {
-                    this.props.history.push('/');    
-                });
-            }
-            })
-        .catch((err) => {
-        console.log(err);
-        this.props.history.push('/error');
-        });    
+                if (errors.length) {
+                    console.log(errors);
+                    this.setState({ errors });
+                }
+                else {
+                    console.log('I am running as well');
+                    context.action.signIn(emailAddress, password)
+                    .then(() => {
+                        this.props.history.push('/');    
+                    });
+                }
+                })
+            .catch((err) => {
+            console.log(err);
+            this.props.history.push('/error');
+            });    
     }
-        // else if( password !== confirmPassword){
-        //     this.setState( {
-        //         errors: ["Password doesnt match"]
-        //     });
-        // }
+        else if( password !== confirmPassword){
+            this.setState( {
+                errors: ["Password doesnt match"]
+            });
+        }
         
     }
 
