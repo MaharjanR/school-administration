@@ -23,8 +23,6 @@ export default class Public extends Component {
         this.setState({
             courses: allCourses
         });
-
-        console.log(this.state.courses);
     }
 
     render(){

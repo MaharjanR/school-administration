@@ -35,7 +35,9 @@ module.exports = sequelize => {
                 notEmpty: {
                     msg: '"Email Address" is required'
                 },
-                isEmail: true, 
+                isEmail: {
+                    msg: '"Email Address" is not valid'
+                }, 
             }, 
             unique: {
                 args: true,

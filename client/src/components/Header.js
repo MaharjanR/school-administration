@@ -1,15 +1,29 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export default class Header extends Component {
 
   render(){
 
-    console.log(this.props.context.authenticatedUser);
-    return(
+    const { context } = this.props;
+    const authUser = context.authenticatedUser;
+
+    console.log(authUser);
+
+   return(
       <div className="header">
         <div className="bounds">
-          <h1 className="header--logo">Courses</h1>
-          <nav><a className="signup" href="signup">Sign Up</a><a className="signin" href="signin">Sign In</a></nav>
+          <h1 className="header--logo"> <Link to='/'>Courses</Link></h1>
+          <nav>
+            { !authUser ? 
+              <React.Fragment>
+                <Link className="signup" to="/signup">Sign Up</Link>
+                <Link className="signin" to="/signin">Sign In</Link>
+              </React.Fragment>
+              :
+              <Link className="signout" to="/signout">Sign Out</Link>
+            }  
+          </nav>
         </div>
       </div>
     )

@@ -32,7 +32,6 @@ export default class SignUp extends Component{
                     this.setState({ errors });
                 }
                 else {
-                    console.log('I am running as well');
                     context.action.signIn(emailAddress, password)
                     .then(() => {
                         this.props.history.push('/');    
@@ -43,8 +42,9 @@ export default class SignUp extends Component{
             console.log(err);
             this.props.history.push('/error');
             });    
-    }
-        else if( password !== confirmPassword){
+        }
+        
+        else{
             this.setState( {
                 errors: ["Password doesnt match"]
             });
@@ -70,8 +70,6 @@ export default class SignUp extends Component{
     render(){
 
         const {
-            emailAddress,
-            password,
             errors
         } = this.state;
 

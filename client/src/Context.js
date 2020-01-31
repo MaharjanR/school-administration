@@ -9,10 +9,11 @@ export class Provider extends Component{
   constructor(){
     super();
     this.data = new Data();
-    this.state = {
-      authenticatedUser:  Cookies.getJSON('authenticatedUser') || null
-    }
   }
+  
+  state = {
+    authenticatedUser:  Cookies.getJSON('authenticatedUser') || null
+  };
 
   signIn = async (emailAddress, password) => {
     
@@ -24,23 +25,30 @@ export class Provider extends Component{
           authenticatedUser: user
         }
       });
+      
       // set cookie
       Cookies.set('authenticatedUser', JSON.stringify(user), { expires: 1 });
     }
-
     return user;
+  }
 
+  signOut = async () => {
+    console.log('cookies has been removed');
+    Cookies.remove('authenticatedUser');
   }
 
   render(){
-    const authenticatedUser = this.authenticatedUser;
+    const authenticatedUser = this.state.authenticatedUser;
+    
     const value = {
       authenticatedUser,
       data: this.data,
       action: {
         signIn: this.signIn,
+        signOut: this.signOut
       }
     };
+
 
     return(
       <Context.Provider value = {value}>

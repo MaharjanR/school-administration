@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { Link } from 'react-router-dom';
 
 export default class Detail extends Component{
 
@@ -27,17 +27,16 @@ export default class Detail extends Component{
         let value;
 
         if(course){
-            const { title, description, estimatedTime, materialsNeeded, firstName, lastName  } = course;
-            console.log(title);
+            const { id, title, description, estimatedTime, materialsNeeded, firstName, lastName  } = course;
             value = (<div>
                         <div className="actions--bar">
                             <div className="bounds">
                                 <div className="grid-100">
                                     <span>
-                                        <a className="button" href="update-course.html">Update Course</a>
-                                        <a className="button" href="#">Delete Course</a>
+                                        <Link className="button" to={`/update/${id}`}>Update Course</Link>
+                                        <Link className="button" to="#">Delete Course</Link>
                                     </span>
-                                    <a className="button button-secondary" href="index.html">Return to List</a>
+                                    <Link className="button button-secondary" to="/">Return to List</Link>
                                 </div>
                             </div>
                         </div>
