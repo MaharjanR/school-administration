@@ -32,12 +32,12 @@ function App() {
         <hr />
         <Switch>
           <Route exact path='/' component={PublicWithContext} />
-          <Route path='/create' component={Create} />
           <Route path='/signin' component={SignInWithContext} />
           <Route path='/signup' component={SignUpWithContext} />
           <Route path='/signout' component={SignOutWithContext} />
           <Route path='/courses/:id' component={DetailWithContext} />
-          <Route path='/update/:id' component={UpdateWithContext} />
+          <Route path='/courses/create' component={Create} />
+          <Route path='/courses/:id/update' component={UpdateWithContext} />
           <Route path='/delete/:id' component={DetailWithContext} />
           <Route path='/error' component={Errors} />
         </Switch>

@@ -11,11 +11,13 @@ export default class Detail extends Component{
         const { context } = this.props;
         // path stores the uri of the link i.e. /courses/:id
         const path = this.props.location.pathname;
+        // getting the courses id only from the path 
+        const id = path.match(/(\d+)/)[0];
 
-        const temp = await context.data.getCourse(path);
+        const course = await context.action.getCourse(id);
         
         this.setState({
-            course: temp
+            course
         });
         
     }
@@ -33,7 +35,7 @@ export default class Detail extends Component{
                             <div className="bounds">
                                 <div className="grid-100">
                                     <span>
-                                        <Link className="button" to={`/update/${id}`}>Update Course</Link>
+                                        <Link className="button" to={`/courses/${id}/update`}>Update Course</Link>
                                         <Link className="button" to="#">Delete Course</Link>
                                     </span>
                                     <Link className="button button-secondary" to="/">Return to List</Link>
