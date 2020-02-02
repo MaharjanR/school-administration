@@ -11,10 +11,8 @@ export default class Detail extends Component{
         const { context } = this.props;
         // path stores the uri of the link i.e. /courses/:id
         const path = this.props.location.pathname;
-        // getting the courses id only from the path 
-        const id = path.match(/(\d+)/)[0];
 
-        const course = await context.action.getCourse(id);
+        const course = await context.action.getCourse(path);
         
         this.setState({
             course
