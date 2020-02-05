@@ -1,27 +1,46 @@
 import React, { Component } from 'react';
 
 export default class Update extends Component {
-
     state = {
         course: null
     };
 
     async componentDidMount(){
         const { context } = this.props;
-        // path stores the uri of the link i.e. /courses/:id
-        const path = this.props.location.pathname;
 
+        // path stores the uri of the link i.e. /update/:id/courses
+        const path = this.props.location.pathname;
         const course = await context.action.getCourse(path);
         
         this.setState({
             course
         });
-        
     }
+
+    handleChange = (event) => {
+        const { value } = event.target;
+        const { name } = event.target;
+
+        const coursesName = `course.${name}`;
+        console.log(name)
+        console.log(this.state.course[name]);   
+        this.setState( () =>{
+            console.log(coursesName);
+            return{
+                coursesName: value
+            }
+        });
+      }
+
     render(){
-        return(
-           
-            <div className="bounds course--detail">
+        let value;
+        const { course } = this.state;
+        // console.log(course);
+
+        if(course){
+            const { id, title, description, estimatedTime, materialsNeeded, firstName, lastName  } = course;
+            value =  
+                <div className="bounds course--detail">
                 <h1>Update Course</h1>
                 <div>
                     <form>
@@ -34,16 +53,15 @@ export default class Update extends Component {
                                         name="title" 
                                         type="text" 
                                         className="input-title course--title--input" 
-                                        placeholder="Course title..." 
+                                        value= {title}
+                                        onChange= { this.handleChange}
                                     />
                                 </div>
-                                <p>By Joe Smith</p>
+                                <p>By { firstName } { lastName }</p>
                             </div>
                             <div className="course--description">
                                 <div>
-                                    <textarea id="description" name="description" className="" placeholder="Course description...">
-                                        While the depth of the case is directly tied to the 1 x 10 stock, you can vary the height, width and shelf spacing to suit your needs. Keep in mind, though, that extending the width of the cabinet may require the addition of central shelf supports.
-                                    </textarea>
+                                    <textarea id="description" name="description" className="" placeholder={ description } value='' onChange= { this.handleChange} />
                                 </div>
                             </div>
                         </div>
@@ -53,15 +71,13 @@ export default class Update extends Component {
                                     <li className="course--stats--list--item">
                                         <h4>Estimated Time</h4>
                                         <div>
-                                            <input id="estimatedTime" name="estimatedTime" type="text" className="course--time--input" placeholder="Hours" />
+                                            <input id="estimatedTime" name="estimatedTime" type="text" className="course--time--input" value= { estimatedTime }  onChange= { this.handleChange} />
                                         </div>
                                     </li>
                                     <li className="course--stats--list--item">
                                         <h4>Materials Needed</h4>
                                         <div>
-                                            {/* <textarea id="materialsNeeded" name="materialsNeeded" className="" placeholder="List materials...">
-                                                * 1/2 x 3/4 inch parting strip
-                                            </textarea> */}
+                                            <textarea id="materialsNeeded" name="materialsNeeded" className="" placeholder="List materials..." value = { materialsNeeded } onChange= { this.handleChange} />
                                         </div>
                                     </li>
                                 </ul>
@@ -74,6 +90,15 @@ export default class Update extends Component {
                     </form>
                 </div>
             </div>
+        }
+        else{
+            value = <p>Loading...</p>
+        }
+
+        return(
+            <React.Fragment>
+                { value }
+           </React.Fragment>
         )
     }
 }

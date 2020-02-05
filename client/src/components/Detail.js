@@ -9,15 +9,14 @@ export default class Detail extends Component{
 
     async componentDidMount(){
         const { context } = this.props;
+
         // path stores the uri of the link i.e. /courses/:id
         const path = this.props.location.pathname;
-
         const course = await context.action.getCourse(path);
         
         this.setState({
             course
         });
-        
     }
 
     render(){
@@ -56,7 +55,7 @@ export default class Detail extends Component{
                                     <ul className="course--stats--list">
                                         <li className="course--stats--list--item">
                                             <h4>Estimated Time</h4>
-                                            <h3> { estimatedTime } </h3>
+                                            <h3> { estimatedTime ? estimatedTime : <p>Unknown</p> } </h3>
                                         </li>
                                         <li className="course--stats--list--item">
                                             <h4>Materials Needed</h4>

@@ -14,6 +14,7 @@ import SignUp from './components/SignUp';
 import SignOut from './components/SignOut';
 import Update from './components/Update';
 import withContext from './Context';
+import PrivateRoute from './PrivateRoute';
 
 const HeaderUpWithContext = withContext(Header);
 
@@ -35,9 +36,9 @@ function App() {
           <Route path='/signin' component={SignInWithContext} />
           <Route path='/signup' component={SignUpWithContext} />
           <Route path='/signout' component={SignOutWithContext} />
+          <PrivateRoute path='/courses/:id/update' component={UpdateWithContext} />
           <Route path='/courses/:id' component={DetailWithContext} />
           <Route path='/courses/create' component={Create} />
-          <Route path='/courses/:id/update' component={UpdateWithContext} />
           <Route path='/delete/:id' component={DetailWithContext} />
           <Route path='/error' component={Errors} />
         </Switch>

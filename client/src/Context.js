@@ -37,8 +37,12 @@ export class Provider extends Component{
     Cookies.remove('authenticatedUser');
   }
 
-  getCourse = async (id) => {
+  getCourse = async (path) => {
+
+    // getting the courses id only from the path 
+    const id = path.match(/(\d+)/)[0];
     const course = `/courses/${id}`;
+
     return this.data.getCourse(course);
   }
 
@@ -64,6 +68,9 @@ export class Provider extends Component{
   }
 
 }
+
+
+export const Consumer = Context.Consumer;
 
 /**
  * A higher-order component that wraps the provided component in a Context Consumer component.
