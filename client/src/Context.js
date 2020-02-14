@@ -37,14 +37,12 @@ export class Provider extends Component{
     Cookies.remove('authenticatedUser');
   }
 
-  getCourse = async (path) => {
-
+  getId = path => {
     // getting the courses id only from the path 
     const id = path.match(/(\d+)/)[0];
-    const course = `/courses/${id}`;
-
-    return this.data.getCourse(course);
+    return id;
   }
+
 
   render(){
     const authenticatedUser = this.state.authenticatedUser;
@@ -55,7 +53,7 @@ export class Provider extends Component{
       action: {
         signIn: this.signIn,
         signOut: this.signOut,
-        getCourse: this.getCourse
+        getId: this.getId
       }
     };
 

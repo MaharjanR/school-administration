@@ -1,6 +1,8 @@
 import React from 'react';
 
 export default (props) => {
+
+  console.log(props);
   const {
     cancel,
     errors,
@@ -35,6 +37,8 @@ export default (props) => {
 
 function ErrorsDisplay({ errors }) {
   let errorsDisplay = null;
+
+  console.log(errors);
 
   if (errors.length) {
     console.log(errors);

@@ -12,7 +12,9 @@ export default class Detail extends Component{
 
         // path stores the uri of the link i.e. /courses/:id
         const path = this.props.location.pathname;
-        const course = await context.action.getCourse(path);
+        // getting only the id from the path
+        const id = context.action.getId(path);
+        const course = await context.data.getCourse(`/courses/${id}`);
         
         this.setState({
             course
@@ -22,7 +24,7 @@ export default class Detail extends Component{
     render(){
         
         const {course} = this.state;
-        console.log(course);
+
         let value;
 
         if(course){
