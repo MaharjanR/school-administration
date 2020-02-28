@@ -25,6 +25,7 @@ const SignInWithContext = withContext(SignIn);
 const SignUpWithContext = withContext(SignUp);
 const SignOutWithContext = withContext(SignOut);
 const UpdateWithContext = withContext(Update);
+const CreateWithContext = withContext(Create);
 
 function App() {
   return (
@@ -38,9 +39,9 @@ function App() {
           <Route path='/signup' component={SignUpWithContext} />
           <Route path='/signout' component={SignOutWithContext} />
           <Route path='/forbidden' component={Forbidden} />
+          <PrivateRoute path='/courses/create' component={CreateWithContext} />
           <PrivateRoute path='/courses/:id/update' component={UpdateWithContext} />
           <Route path='/courses/:id' component={DetailWithContext} />
-          <Route exact path='/courses/create' component={Create} />
           <Route path='/delete/:id' component={DetailWithContext} />
           <Route path='/error' component={Errors} />
         </Switch>

@@ -11,6 +11,7 @@ export default class Update extends Component {
         materialsNeeded: '',
         firstName: '',
         lastName: '',
+        emailAddress: '',
         errors: ''
     };
 
@@ -22,8 +23,8 @@ export default class Update extends Component {
         // getting only the id from the path
         const pathInt = context.action.getId(path);
         const course = await context.data.getCourse(`/courses/${pathInt}`);
-        
-        const { id, title, description, estimatedTime, materialsNeeded, firstName, lastName  } = course;
+        console.log(course);
+        const { id, title, description, estimatedTime, materialsNeeded, firstName, lastName, emailAddress  } = course;
 
         this.setState({
             id, 
@@ -32,7 +33,8 @@ export default class Update extends Component {
             estimatedTime,
             materialsNeeded,
             firstName, 
-            lastName
+            lastName,
+            emailAddress
         });
     }
 
@@ -51,14 +53,38 @@ export default class Update extends Component {
 
         const { id, title, description, estimatedTime, materialsNeeded, firstName, lastName  } = this.state;
         const { context } = this.props;
+        const { emailAddress, password } = context.authenticatedUser;
+        const { from } = this.props.location.state || { from: { pathname: '/' } };
+
+        console.log(this.props.location);
+
+
+        const updatedCourse = {
+            id,
+            title,
+            description,
+            estimatedTime,
+            materialsNeeded,
+            firstName,
+            lastName
+        }
         
-        const update = await context.data.updateCourses(`/courses/${id}`, {id, title, description, estimatedTime, materialsNeeded, firstName, lastName});
+        const credentials = {
+            username: emailAddress,
+            password: password
+        }
+
+        const update = await context.data.updateCourses(`/courses/${id}`, updatedCourse, credentials );
         console.log(update);
-        if(update){
-            console.log('Successfully updated');
+        if(update.length === 0){
+            console.log('Courses has been updated sucessfully');
+            this.props.history.push(from);
+
         }
         else{
-            console.log(update);
+            this.setState({
+                errors: update
+            })
         }
     }
  
@@ -70,15 +96,13 @@ export default class Update extends Component {
 
     render(){
         let value;
-        const {  id, title, description, estimatedTime, materialsNeeded, firstName, lastName, errors } = this.state;
+        const { id, emailAddress, title, description, estimatedTime, materialsNeeded, firstName, lastName, errors } = this.state;
 
         const user = this.props.context.authenticatedUser; 
-        const userId = user.id;
-        console.log(id);
-        console.log(userId);
+        const userEmail = user.emailAddress;
 
         if(id){
-            if(userId === id){
+            if(userEmail === emailAddress){
                 value =  
                 <div className="bounds course--detail">
                 <h1>Update Course</h1>
