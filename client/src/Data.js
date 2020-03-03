@@ -90,13 +90,14 @@ export default class Data {
     }
   }
 
-  async deleteCourses(url){
+  async deleteCourses(url, username, password){
 
-    const response = await this.api(url, 'DELETE');
-    if (response.status === 201) {
+    const response = await this.api(url, 'DELETE', null, true, { username, password });
+    console.log(response);
+    if (response.status === 204) {
       return [];
     }
-    else if (response.status === 400) {
+    else if (response.status === 403) {
       return response.json().then(data => {
         return data.message;
       });

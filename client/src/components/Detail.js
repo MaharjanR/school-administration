@@ -21,6 +21,27 @@ export default class Detail extends Component{
         });
     }
 
+    deleteCourse = async () => {
+        const { context } = this.props;
+        const url = this.props.location.pathname;
+        const username = context.authenticatedUser.emailAddress;
+        const password = context.authenticatedUser.password;
+        const { from } = this.props.location.state || { from: { pathname: '/' } };
+
+        console.log(this.props);
+
+        const deleteCourse = await context.data.deleteCourses(url, username, password);
+        console.log(deleteCourse);  
+        if(deleteCourse.length < 1){
+            console.log('working');
+            this.props.history.push(from);
+        }
+        else{
+            console.log('wo0');
+            this.props.history.push('/forbidden')
+        }
+    }
+
     render(){
         
         const {course} = this.state;
@@ -35,7 +56,7 @@ export default class Detail extends Component{
                                 <div className="grid-100">
                                     <span>
                                         <Link className="button" to={`/courses/${id}/update`}>Update Course</Link>
-                                        <Link className="button" to="#">Delete Course</Link>
+                                        <button className="button" onClick={this.deleteCourse}>Delete Course</button>
                                     </span>
                                     <Link className="button button-secondary" to="/">Return to List</Link>
                                 </div>
