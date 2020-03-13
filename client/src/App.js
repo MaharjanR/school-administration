@@ -6,13 +6,13 @@ import {
 } from 'react-router-dom';
 import Header from './components/Header';
 import Public from './components/Public';
-import Create from './components/Create';
-import Detail from './components/Detail';
+import CreateCourse from './components/CreateCourse';
+import CourseDetail from './components/CourseDetail';
 import Errors from './components/Error';
-import SignIn from './components/SignIn';
-import SignUp from './components/SignUp';
-import SignOut from './components/SignOut';
-import Update from './components/Update';
+import UserSignIn from './components/UserSignIn';
+import UserSignUp from './components/UserSignUp';
+import UserSignOut from './components/UserSignOut';
+import UpdateCourse from './components/UpdateCourse';
 import withContext from './Context';
 import PrivateRoute from './PrivateRoute';
 import Forbidden from './components/Forbidden';
@@ -20,12 +20,12 @@ import Forbidden from './components/Forbidden';
 const HeaderUpWithContext = withContext(Header);
 
 const PublicWithContext = withContext(Public);
-const DetailWithContext = withContext(Detail);
-const SignInWithContext = withContext(SignIn);
-const SignUpWithContext = withContext(SignUp);
-const SignOutWithContext = withContext(SignOut);
-const UpdateWithContext = withContext(Update);
-const CreateWithContext = withContext(Create);
+const DetailWithContext = withContext(CourseDetail);
+const SignInWithContext = withContext(UserSignIn);
+const SignUpWithContext = withContext(UserSignUp);
+const SignOutWithContext = withContext(UserSignOut);
+const UpdateWithContext = withContext(UpdateCourse);
+const CreateWithContext = withContext(CreateCourse);
 
 function App() {
   return (

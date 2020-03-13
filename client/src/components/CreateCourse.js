@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Form from './Form';
 
-export default class Create extends Component {
+export default class CreateCourse extends Component {
 
     state = {
         title: '',

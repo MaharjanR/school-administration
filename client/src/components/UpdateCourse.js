@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Form from './Form';
 import { Redirect } from 'react-router-dom';
 
-export default class Update extends Component {
+export default class UpdateCourse extends Component {
     state = {
         id: '',
         title: '',
