@@ -28,16 +28,12 @@ export default class CourseDetail extends Component{
         const password = context.authenticatedUser.password;
         const { from } = this.props.location.state || { from: { pathname: '/' } };
 
-        console.log(this.props);
 
         const deleteCourse = await context.data.deleteCourses(url, username, password);
-        console.log(deleteCourse);  
         if(deleteCourse.length < 1){
-            console.log('working');
             this.props.history.push(from);
         }
         else{
-            console.log('wo0');
             this.props.history.push('/forbidden')
         }
     }
@@ -45,19 +41,22 @@ export default class CourseDetail extends Component{
     render(){
         
         const {course} = this.state;
-
+        const userEmail= this.props.context.authenticatedUser.emailAddress;
         let value;
 
         if(course){
-            const { id, title, description, estimatedTime, materialsNeeded, firstName, lastName  } = course;
+            const { id, title, description, estimatedTime, materialsNeeded, firstName, lastName, emailAddress  } = course;
             value = (<div>
                         <div className="actions--bar">
                             <div className="bounds">
                                 <div className="grid-100">
+                                    { 
+                                    (emailAddress === userEmail) && 
                                     <span>
                                         <Link className="button" to={`/courses/${id}/update`}>Update Course</Link>
                                         <button className="button" onClick={this.deleteCourse}>Delete Course</button>
                                     </span>
+                                    }
                                     <Link className="button button-secondary" to="/">Return to List</Link>
                                 </div>
                             </div>

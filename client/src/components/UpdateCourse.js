@@ -23,7 +23,6 @@ export default class UpdateCourse extends Component {
         // getting only the id from the path
         const pathInt = context.action.getId(path);
         const course = await context.data.getCourse(`/courses/${pathInt}`);
-        console.log(course);
         const { id, title, description, estimatedTime, materialsNeeded, firstName, lastName, emailAddress  } = course;
 
         this.setState({
@@ -56,9 +55,6 @@ export default class UpdateCourse extends Component {
         const { emailAddress, password } = context.authenticatedUser;
         const { from } = this.props.location.state || { from: { pathname: '/' } };
 
-        console.log(this.props.location);
-
-
         const updatedCourse = {
             id,
             title,
@@ -75,7 +71,6 @@ export default class UpdateCourse extends Component {
         }
 
         const update = await context.data.updateCourses(`/courses/${id}`, updatedCourse, credentials );
-        console.log(update);
         if(update.length === 0){
             console.log('Courses has been updated sucessfully');
             this.props.history.push(from);
@@ -152,7 +147,6 @@ export default class UpdateCourse extends Component {
                 </div>
             }
             else{
-               console.log('something happens');
                value = <Redirect to='/forbidden' />
             }
         }

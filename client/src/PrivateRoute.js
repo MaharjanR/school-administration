@@ -15,7 +15,7 @@ export default ({ component: Component, ...rest }) => {
           (
             <Redirect to={{
               pathname: '/signin',
-              access: {from: props.location }
+              state: {from: props.location }
             }} />
           )
         }

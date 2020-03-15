@@ -8,8 +8,6 @@ export default class Header extends Component {
     const { context } = this.props;
     const authUser = context.authenticatedUser;
 
-    console.log(authUser);
-
    return(
       <div className="header">
         <div className="bounds">
@@ -21,7 +19,10 @@ export default class Header extends Component {
                 <Link className="signin" to="/signin">Sign In</Link>
               </React.Fragment>
               :
-              <Link className="signout" to="/signout">Sign Out</Link>
+              <React.Fragment>
+                <span>Welcome {authUser.firstName}!</span>
+                <Link className="signout" to="/signout">Sign Out</Link>
+              </React.Fragment>
             }  
           </nav>
         </div>

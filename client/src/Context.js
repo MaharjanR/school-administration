@@ -34,7 +34,9 @@ export class Provider extends Component{
   }
 
   signOut = async () => {
-    console.log('cookies has been removed');
+    this.setState({
+        authenticatedUser: null
+      });
     Cookies.remove('authenticatedUser');
   }
 
@@ -46,7 +48,7 @@ export class Provider extends Component{
 
 
   render(){
-    const authenticatedUser = this.state.authenticatedUser;
+    const { authenticatedUser } = this.state  ;
     
     const value = {
       authenticatedUser,

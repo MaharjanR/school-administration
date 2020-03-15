@@ -41,7 +41,6 @@ export default class CreateCourse extends Component {
         }
         const addCourse = await context.data.createCourses(courses, credential);
 
-        console.log(addCourse);
 
         if(addCourse.length === 0){
             console.log('Courses has been added successfully');
