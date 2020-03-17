@@ -41,11 +41,17 @@ export default class CourseDetail extends Component{
     render(){
         
         const {course} = this.state;
-        const userEmail= this.props.context.authenticatedUser.emailAddress;
+        const {authenticatedUser} = this.props.context;
+        let userEmail= null;
+        if(authenticatedUser){
+            userEmail= authenticatedUser.emailAddress;
+        }
         let value;
+
 
         if(course){
             const { id, title, description, estimatedTime, materialsNeeded, firstName, lastName, emailAddress  } = course;
+            console.log(emailAddress);
             value = (<div>
                         <div className="actions--bar">
                             <div className="bounds">
