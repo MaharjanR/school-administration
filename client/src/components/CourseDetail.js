@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+const ReactMarkdown = require('react-markdown');
 
 export default class CourseDetail extends Component{
 
@@ -75,7 +76,7 @@ export default class CourseDetail extends Component{
                                     <p>By { firstName } { lastName }</p>
                                 </div>
                                 <div className="course--description">
-                                    <p> { description } </p>
+                                    <p> <ReactMarkdown source={ description } /> </p>
                                 </div>
                             </div>
                             <div className="grid-25 grid-right">
@@ -88,7 +89,7 @@ export default class CourseDetail extends Component{
                                         <li className="course--stats--list--item">
                                             <h4>Materials Needed</h4>
                                             <ul>
-                                                { (materialsNeeded) ?  <li>{ materialsNeeded }</li> : <li>None</li>}
+                                                { (materialsNeeded) ?  <ReactMarkdown source={ materialsNeeded } /> : <li>None</li>}
                                             </ul>
                                         </li>
                                     </ul>
