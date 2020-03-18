@@ -13,9 +13,11 @@ export default class UserSignUp extends Component{
     }
 
     submit = () => {
+        // gets the value from state and props
         const { context } = this.props;
         const { firstName, lastName, emailAddress, password, confirmPassword } = this.state;
 
+        // creaes a user object to send to API
         const user = {
             firstName,
             lastName,
@@ -23,13 +25,17 @@ export default class UserSignUp extends Component{
             password
         }
 
+        // if both password matches then create user
         if( password === confirmPassword){
+            // calls the createUser from API passing the user data
             context.data.createUser(user)
             .then( errors => {
+                // if errors present, display errors
                 if (errors.length) {
                     this.setState({ errors });
                 }
                 else {
+                    // create account and sign in
                     context.action.signIn(emailAddress, password)
                     .then(() => {
                         this.props.history.push('/');    
@@ -42,6 +48,7 @@ export default class UserSignUp extends Component{
             });    
         }
         
+        // if password doesnt match, save errors to the state
         else{
             this.setState( {
                 errors: ["Password doesnt match"]
@@ -55,6 +62,8 @@ export default class UserSignUp extends Component{
     }
 
     change = (event) => {
+
+        // when name and value is changed
         const {name} = event.target;
         const {value} = event.target;
 
@@ -67,9 +76,7 @@ export default class UserSignUp extends Component{
     
     render(){
 
-        const {
-            errors
-        } = this.state;
+        const { errors } = this.state;
 
         return(
             <div className="bounds">

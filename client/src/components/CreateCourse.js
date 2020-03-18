@@ -12,9 +12,9 @@ export default class CreateCourse extends Component {
     }
 
     handleChange = (event) => {
+        // when the input element changes, stores the value to the state accordingly
         const { value } = event.target;
         const { name } = event.target;
-
 
         this.setState({
             [name]: value
@@ -22,16 +22,20 @@ export default class CreateCourse extends Component {
     }
 
     onSubmit = async () => {
+
+        // gets the required data from state and props
         const { context } = this.props;
         const { title, description, estimatedTime, materialsNeeded } = this.state;
         const { emailAddress, password, id } = context.authenticatedUser;
         const { from } = this.props.location.state || { from: { pathname: '/' } };
 
+        // setting up the credential object
         const credential = { 
             'username': emailAddress,
             'password': password
         }
 
+        // creating the courses object 
         const courses = {
             'title': title,
             'description': description,
@@ -39,13 +43,17 @@ export default class CreateCourse extends Component {
             'materialsNeeded': materialsNeeded,
             'userId': id
         }
+
+        // create the courses by passing the user information and courses details
         const addCourse = await context.data.createCourses(courses, credential);
 
 
+        // if the courses is successful, return empty array and courses is created
         if(addCourse.length === 0){
             console.log('Courses has been added successfully');
             this.props.history.push(from);
         }
+        // if its not successful, the errors are stored in the errors state
         else{
             this.setState({
                 errors: addCourse
@@ -53,11 +61,13 @@ export default class CreateCourse extends Component {
         }
     }
 
+    // redirects to the homepage
     onCancel = () => {
         this.props.history.push('/');
     }
 
     render(){
+        // getting the values in order to populate the fields
         const { authenticatedUser } = this.props.context;
         const name = `${authenticatedUser.firstName} ${authenticatedUser.lastName}`;
         const { title, description, estimatedTime, materialsNeeded, errors} = this.state;

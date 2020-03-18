@@ -22,6 +22,7 @@ export default class UpdateCourse extends Component {
         const path = this.props.location.pathname;
         // getting only the id from the path
         const pathInt = context.action.getId(path);
+        // gets the courses value and save it in course
         const course = await context.data.getCourse(`/courses/${pathInt}`);
         const { id, title, description, estimatedTime, materialsNeeded, firstName, lastName, emailAddress  } = course;
 
@@ -38,6 +39,7 @@ export default class UpdateCourse extends Component {
     }
 
     handleChange = (event) => {
+        // when value changes, store it in the state
         const { value } = event.target;
         const { name } = event.target;
 
@@ -55,6 +57,7 @@ export default class UpdateCourse extends Component {
         const { emailAddress, password } = context.authenticatedUser;
         const { from } = this.props.location.state || { from: { pathname: '/' } };
 
+        // creating an object with new value of course
         const updatedCourse = {
             id,
             title,
@@ -65,17 +68,21 @@ export default class UpdateCourse extends Component {
             lastName
         }
         
+        // getting user info
         const credentials = {
             username: emailAddress,
             password: password
         }
 
+        // calls the update course
         const updateCourse = await context.data.updateCourses(`/courses/${id}`, updatedCourse, credentials );
+        // if course is updated
         if(updateCourse.length === 0){
             console.log('Courses has been updated sucessfully');
             this.props.history.push(from);
 
         }
+        // else save errors in state
         else{
             this.setState({
                 errors: updateCourse
@@ -93,10 +100,13 @@ export default class UpdateCourse extends Component {
         let value;
         const { id, emailAddress, title, description, estimatedTime, materialsNeeded, firstName, lastName, errors } = this.state;
 
+        // gets users email and courses email
         const user = this.props.context.authenticatedUser; 
         const userEmail = user.emailAddress;
 
+        // check if course is present or not
         if(id){
+            // check if the user email and courses email match and display if match
             if(userEmail === emailAddress){
                 value =  
                 <div className="bounds course--detail">

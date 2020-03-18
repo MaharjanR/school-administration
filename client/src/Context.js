@@ -12,13 +12,16 @@ export class Provider extends Component{
   }
   
   state = {
+    // gets the authenticateduser from cookies and if not found stores null as authenticated user
     authenticatedUser:  Cookies.getJSON('authenticatedUser') || null
   };
 
   signIn = async (emailAddress, password) => {
     
+    // calls the getUser from API
     const user = await this.data.getUser( emailAddress, password);
   
+    // if user is found, sets teh password and stores the authenticated user
     if(user !== null){
       user.password = password;
       this.setState( () => {
@@ -34,6 +37,7 @@ export class Provider extends Component{
   }
 
   signOut = async () => {
+    // changes the state of authenticated user and removes the cookies
     this.setState({
         authenticatedUser: null
       });

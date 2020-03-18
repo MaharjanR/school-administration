@@ -2,6 +2,7 @@ import React from 'react';
 
 export default (props) => {
 
+  // getting the value from propss and assigning it to the variable
   const {
     cancel,
     errors,
@@ -11,11 +12,13 @@ export default (props) => {
   } = props;
 
   function handleSubmit(event) {
+    // preventing the default function and calls submit button from props
     event.preventDefault();
     submit();
   }
 
   function handleCancel(event) {
+    // preventing the default function and calls cancel button from props
     event.preventDefault();
     cancel();
   }
@@ -37,7 +40,7 @@ export default (props) => {
 function ErrorsDisplay({ errors }) {
   let errorsDisplay = null;
 
-
+  // if there is erors, display error
   if (errors.length) {
     errorsDisplay = (
       <div>

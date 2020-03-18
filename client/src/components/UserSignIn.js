@@ -15,9 +15,11 @@ export default class UserSignIn extends Component{
         const { context } = this.props;
         const { emailAddress, password } = this.state;
         const { from } = this.props.location.state || { from: { pathname: '/' } };
-        
+
+        // calls the signin function by passing user email and password
         context.action.signIn( emailAddress, password )
             .then( user => {
+                // if user is not returned, show errors
                 if( user === null){
                     this.setState( () => {
                         return{
@@ -25,6 +27,7 @@ export default class UserSignIn extends Component{
                         }
                     });
                 }
+                // if match, sign in
                 else{
                     this.props.history.push(from);
                     console.log(`SUCCESS! ${emailAddress} is now signed in!`);
@@ -36,11 +39,13 @@ export default class UserSignIn extends Component{
             })
     }
 
+    // redirects to the homepage
     cancel = () => {
         this.props.history.push('/');
     }
 
     change = (event) => {
+        // saved the value to state when changed
         const {name} = event.target;
         const {value} = event.target;
 
@@ -53,9 +58,8 @@ export default class UserSignIn extends Component{
     
     render(){
 
-        const {
-            errors
-        } = this.state;
+        // calls the errors from state to send it to form
+        const { errors } = this.state;
 
         return(
             <div className="bounds">
