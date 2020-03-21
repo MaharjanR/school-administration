@@ -16,9 +16,9 @@ import UpdateCourse from './components/UpdateCourse';
 import withContext from './Context';
 import PrivateRoute from './PrivateRoute';
 import Forbidden from './components/Forbidden';
+import NotFound from './components/NotFound';
 
 const HeaderUpWithContext = withContext(Header);
-
 const PublicWithContext = withContext(Public);
 const DetailWithContext = withContext(CourseDetail);
 const SignInWithContext = withContext(UserSignIn);
@@ -44,6 +44,7 @@ function App() {
           <Route path='/courses/:id' component={DetailWithContext} />
           <Route path='/delete/:id' component={DetailWithContext} />
           <Route path='/error' component={Errors} />
+          <Route component={ NotFound } />
         </Switch>
       </React.Fragment>
     </Router>
